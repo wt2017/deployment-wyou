@@ -1,0 +1,10 @@
+FROM docker.io/library/fedora:latest
+
+RUN dnf install iproute -y
+RUN dnf install libcap -y
+WORKDIR /home
+COPY --chown=999:999 ena_hw_ts .
+COPY --chown=999:999 entrypoint.sh .
+RUN setcap 'cap_net_admin=+ep' ena_hw_ts
+
+ENTRYPOINT ["/home/ena_hw_ts", "eth0"]
