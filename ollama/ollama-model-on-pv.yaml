@@ -8,7 +8,7 @@ spec:
  hostIPC: true
  containers:
  - name: ollama-model-on-pv
-   image: localhost/ollama-source-build:v0.0.2
+   image: docker.io/ollama/ollama:latest
    imagePullPolicy: Never
    resources:
       limits:
