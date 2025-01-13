@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: fedora-mc
+ namespace: default
+ annotations:
+   k8s.v1.cni.cncf.io/networks: |
+     [
+       {
+         "name": "macvlan-network",
+         "interface": "macvlan1"
+       }
+     ]
+spec:
+ #hostNetwork: true
+ #hostIPC: true
+ containers:
+ - name: fedora-mc
+   image: localhost/fedora-mc
+   imagePullPolicy: Never
+   command: [ "/bin/bash", "-c", "--" ]       # You need to run some task inside a container to keep it running
+   args: [ "while true; do sleep 10; done;" ]
+   securityContext:
+     privileged: true
+ restartPolicy: Never
+ tolerations:
+ - key: "key"
+   operator: "Exists"
+   effect: "NoSchedule"
