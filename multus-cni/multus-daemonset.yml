@@ -180,6 +180,7 @@ spec:
       containers:
       - name: kube-multus
         image: ghcr.io/k8snetworkplumbingwg/multus-cni:snapshot
+        imagePullPolicy: Never
         command: ["/thin_entrypoint"]
         args:
         - "--multus-conf-file=auto"
@@ -205,6 +206,7 @@ spec:
       initContainers:
         - name: install-multus-binary
           image: ghcr.io/k8snetworkplumbingwg/multus-cni:snapshot
+          imagePullPolicy: Never
           command: ["/install_multus"]
           args:
             - "--type"
