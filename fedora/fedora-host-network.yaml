@@ -4,6 +4,8 @@ metadata:
  name: fedora
  namespace: default
 spec:
+ hostNetwork: true
+ hostIPC: true
  containers:
  - name: fedora
    image: docker.io/library/fedora

@@ -7,7 +7,7 @@ spec:
   config: '{
     "cniVersion": "1.0.0",
     "type": "macvlan",
-    "master": "eth0",
+    "master": "enp1s0",
     "mode": "bridge",
     "ipam": {
       "type": "host-local",
