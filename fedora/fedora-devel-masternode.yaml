@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Pod
 metadata:
- name: fedora-devel-worknode
+ name: fedora-devel-masternode
  namespace: default
 spec:
  #hostNetwork: true
  #hostIPC: true
- nodeName: vvfanny
+ nodeName: fedora
  containers:
- - name: fedora-devel-worknode
+ - name: fedora-devel-masternode
    #image: docker.io/library/fedora
    image: localhost/fedora-devel:v0.0.3
    imagePullPolicy: Never
