@@ -10,7 +10,7 @@ spec:
  containers:
  - name: fedora-devel-workernode
    #image: docker.io/library/fedora
-   image: localhost/fedora-devel:v0.0.3
+   image: localhost/fedora-devel:v0.0.4
    imagePullPolicy: Never
    securityContext:
      privileged: true
