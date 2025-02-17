@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
- name: fedora
+ name: fedora-devel-1
  namespace: default
 spec:
  containers:
- - name: fedora
-   image: localhost/fedora-devel:v0.0.1
+ - name: fedora-devel-1
+   image: localhost/fedora-devel:latest
    imagePullPolicy: Never
    command: [ "/bin/bash", "-c", "--" ]       # You need to run some task inside a container to keep it running
    args: [ "while true; do sleep 10; done;" ]

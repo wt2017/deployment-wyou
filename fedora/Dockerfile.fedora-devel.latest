@@ -1,0 +1,11 @@
+FROM docker.io/library/fedora:latest
+
+RUN dnf update -y
+RUN dnf install git -y
+RUN dnf install iproute -y
+RUN dnf install tcpdump -y
+RUN dnf install nftables -y
+RUN dnf install procps -y
+RUN dnf install -y iputils
+RUN dnf install -y openssl
+RUN dnf install -y iperf iperf3
