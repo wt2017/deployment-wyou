@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: fedora-dp
+ namespace: default
+spec:
+ containers:
+ - name: fedora-dp
+   image: localhost/fedora-dp:latest
+   imagePullPolicy: Never
+   command: [ "/bin/bash", "-c", "--" ]       # You need to run some task inside a container to keep it running
+   args: [ "while true; do sleep 10; done;" ]
+ restartPolicy: Never
+ tolerations:
+ - key: "key"
+   operator: "Exists"
+   effect: "NoSchedule"
