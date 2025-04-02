@@ -8,6 +8,10 @@ spec:
  - name: fedora-ptp
    image: localhost/fedora-ptp:latest
    imagePullPolicy: Never
+   securityContext:
+     runAsUser: 1000  # UID of the non-root user
+     runAsGroup: 1000 # GID of the non-root user
+     allowPrivilegeEscalation: false
    command: [ "/bin/bash", "-c", "--" ]       # You need to run some task inside a container to keep it running
    args: [ "while true; do sleep 10; done;" ]
    resources:
