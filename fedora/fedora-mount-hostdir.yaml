@@ -6,7 +6,8 @@ metadata:
 spec:
  containers:
  - name: fedora-mount-hostdir
-   image: docker.io/library/fedora
+   #image: docker.io/library/fedora
+   image: localhost/fedora-ptp:latest
    imagePullPolicy: Never
    securityContext:
      runAsUser: 1000  # UID of the non-root user
@@ -17,11 +18,16 @@ spec:
    volumeMounts:
    - name: host-tmp-volume
      mountPath: /host-tmp
+   - name: host-dev-volume
+     mountPath: /host-dev
  volumes:
  - name: host-tmp-volume
    hostPath:
      path: /tmp
      type: DirectoryOrCreate
+ - name: host-dev-volume
+   hostPath:
+     path: /dev
  restartPolicy: Never
  tolerations:
  - key: "key"
