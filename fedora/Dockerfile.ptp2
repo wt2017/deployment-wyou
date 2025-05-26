@@ -1,0 +1,5 @@
+FROM docker.io/library/fedora:latest
+
+WORKDIR /home
+COPY operate_ptp_time2 .
+
