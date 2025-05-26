@@ -1,0 +1,9 @@
+FROM fedora:40
+
+RUN dnf install -y \
+    iproute \
+    iputils \
+    net-tools \
+    tcpdump \
+    nftables \
+    kmod

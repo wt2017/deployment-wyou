@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: fedora-mount-hostdir
+ namespace: default
+spec:
+ containers:
+ - name: fedora-mount-hostdir
+   image: docker.io/library/fedora
+   imagePullPolicy: Never
+   securityContext:
+     runAsUser: 1000  # UID of the non-root user
+     runAsGroup: 1000 # GID of the non-root user
+     allowPrivilegeEscalation: false
+   command: [ "/bin/bash", "-c", "--" ]       # You need to run some task inside a container to keep it running
+   args: [ "while true; do sleep 10; done;" ]
+   volumeMounts:
+   - name: host-tmp-volume
+     mountPath: /host-tmp
+ volumes:
+ - name: host-tmp-volume
+   hostPath:
+     path: /tmp
+     type: DirectoryOrCreate
+ restartPolicy: Never
+ tolerations:
+ - key: "key"
+   operator: "Exists"
+   effect: "NoSchedule"
