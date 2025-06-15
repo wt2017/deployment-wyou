@@ -1,3 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ollama-service
+  namespace: default
+spec:
+  selector:
+    app: ollama-model
+  ports:
+    - protocol: TCP
+      port: 13140
+      targetPort: 11434
+  type: ClusterIP
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -13,17 +27,22 @@ spec:
       labels:
         app: ollama-model
     spec:
-      hostNetwork: true
-      hostIPC: true
+      #hostNetwork: true
+      #hostIPC: true
       containers:
       - name: ollama-model-on-pv
         image: docker.io/ollama/ollama:latest
         imagePullPolicy: Never
+        command: ["ollama"]
+        args: ["serve"]
+        #command: ["/bin/bash", "-c", "--"]
+        #args: ["while true; do sleep 10; done;"]
         resources:
           limits:
             nvidia.com/gpu: 1
-        command: ["/bin/bash", "-c", "--"]
-        args: ["while true; do sleep 10; done;"]
+        ports:
+        - containerPort: 11434
+          protocol: TCP
         volumeMounts:
         - name: ollama-storage
           mountPath: /root/.ollama
