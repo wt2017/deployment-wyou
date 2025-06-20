@@ -26,6 +26,9 @@ spec:
     metadata:
       labels:
         app: ollama-model
+      annotations:
+        # Pod 进入 Failed 状态 60 秒后自动删除
+        ttl-after-finished.kubernetes.io: "60"
     spec:
       #hostNetwork: true
       #hostIPC: true
