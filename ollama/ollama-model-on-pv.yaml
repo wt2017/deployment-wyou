@@ -26,9 +26,7 @@ spec:
     metadata:
       labels:
         app: ollama-model
-      annotations:
-        # Pod 进入 Failed 状态 60 秒后自动删除
-        ttl-after-finished.kubernetes.io: "60"
+      # Removed TTL annotation as it's not working as expected
     spec:
       #hostNetwork: true
       #hostIPC: true
@@ -38,17 +36,28 @@ spec:
         imagePullPolicy: Never
         command: ["ollama"]
         args: ["serve"]
-        #command: ["/bin/bash", "-c", "--"]
-        #args: ["while true; do sleep 10; done;"]
         resources:
           limits:
             nvidia.com/gpu: 1
         ports:
         - containerPort: 11434
           protocol: TCP
+        livenessProbe:
+          tcpSocket:
+            port: 11434
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          tcpSocket:
+            port: 11434
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          failureThreshold: 3
         volumeMounts:
         - name: ollama-storage
           mountPath: /root/.ollama
+      terminationGracePeriodSeconds: 60
       volumes:
       - name: ollama-storage
         persistentVolumeClaim:
