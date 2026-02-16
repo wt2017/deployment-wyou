@@ -28,11 +28,11 @@ spec:
         app: ollama-model
       # Removed TTL annotation as it's not working as expected
     spec:
-      #hostNetwork: true
-      #hostIPC: true
+      hostNetwork: true
+      hostIPC: true
       containers:
       - name: ollama-model-on-pv
-        image: docker.io/ollama/ollama:latest
+        image: docker.io/ollama/ollama:0.15.6-0-g099a0f1-dirty
         imagePullPolicy: Never
         command: ["ollama"]
         args: ["serve"]
