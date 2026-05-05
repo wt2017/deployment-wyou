@@ -1,0 +1,28 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: pg-cluster
+spec:
+  # 如果只有一个 worker 节点（如 kind/minikube），使用 1 个实例
+  # 如需 3 个实例，确保已创建对应的 3 个 PV
+  instances: 1
+
+  # 使用静态 PV，必须指定相同的 storageClassName
+  storage:
+    size: 1Gi
+    storageClass: postgresql
+
+  # 从零初始化集群，自动创建 app 数据库和 app 用户
+  bootstrap:
+    initdb:
+      database: app
+      owner: app
+
+  # 资源限制（按实际环境调整）
+  # resources:
+  #   requests:
+  #     memory: "1Gi"
+  #     cpu: "500m"
+  #   limits:
+  #     memory: "2Gi"
+  #     cpu: "1"

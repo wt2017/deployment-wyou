@@ -1,0 +1,11 @@
+#1 install CloudNativePG operator
+kubectl apply --server-side -f https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.29/releases/cnpg-1.29.0.yaml
+
+#2 create PV local path
+
+#3 apply PV
+kubectl apply -f pv-postgresql.yaml
+
+#4 apply app
+kubectl apply -f pg-cluster.yaml
+
